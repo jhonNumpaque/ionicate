@@ -76,7 +76,7 @@ angular.module('ionicate', [])
               pi++;
             }
             for(var j = 0; j < r.questions.length; j++) {
-              q = r[j];
+              q = r.questions[j];
               if(q.tag == parts[pi]) {
                 pi++;
               }
