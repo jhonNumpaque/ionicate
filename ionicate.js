@@ -51,12 +51,9 @@ angular.module('ionicate', [])
           $scope.results = results;
           $scope.showContact = $scope.shouldShowContact(results);
 
-          // Only send the results if we aren't asking them if we can contact them
-          if(!$scope.showContact) {
-            $scope.onFinish({
-              results: results
-            });
-          }
+          $scope.onFinish({
+            results: results
+          });
         }
       }
 
@@ -126,10 +123,14 @@ angular.module('ionicate', [])
           }
 
           if(qResults.length) {
-            results[q.tag] = qResults;
+            results[q.tag] = {
+              title: o.title,
+              questions: qResults
+            };
           }
         }
 
+        console.log("Got results", results);
 
         return results;
       }
