@@ -130,8 +130,6 @@ angular.module('ionicate', [])
           }
         }
 
-        console.log("Got results", results);
-
         return results;
       }
 
