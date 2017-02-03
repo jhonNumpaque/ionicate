@@ -124,7 +124,7 @@ angular.module('ionicate', [])
 
           if(qResults.length) {
             results[q.tag] = {
-              title: o.title,
+              title: q.title,
               questions: qResults
             };
           }
