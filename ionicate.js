@@ -195,4 +195,4 @@ angular.module('ionicate', [])
       }
     }
   }
-})
+});
