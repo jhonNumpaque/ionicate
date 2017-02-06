@@ -11,13 +11,9 @@ angular.module('ionicate', [])
     },
     template: '<div class="ionicate-wrap">' +
                 '<div class="ionicate-close"><a ng-click="close()"><i class="ion-ios-close"></i></a></div>' +
-                '<div class="ionicate-title" ng-if="questions.cover && showCover">{{questions.cover.title}}</div>' +
-                '<div class="ionicate-title" ng-if="question && !showCover">{{question.title}}</div>' +
+                '<div class="ionicate-title" ng-if="question">{{question.title}}</div>' +
                 '<div class="ionicate-title" ng-if="!question">{{done.title}}</div>' +
                 '<div class="ionicate-content">' +
-                  '<div class="ionicate-cover" ng-if="questions.cover && showCover">' +
-                    '<div ng-bind-html="questions.cover.content"></div>' +
-                  '</div>' +
                   '<div class="ionicate-done" ng-if="!question && !showCover">' +
                     '<div ng-if="!showContact">{{done.text}}</div>' +
                     '<div class="ionicate-contact" ng-if="showContact">' +
@@ -31,7 +27,10 @@ angular.module('ionicate', [])
                       */
                     '</div>' +
                   '</div>' +
-                  '<ul class="ionicate-questions" ng-if="question && !showCover">' +
+                  '<div class="ionicate-question-content" ng-if="question.content">' +
+                    '<div ng-bind-html="question.content"></div>' +
+                  '</div>' +
+                  '<ul class="ionicate-questions" ng-if="question && !question.content">' +
                     '<li ng-repeat="q in question.options" ng-click="selectOption($event, question, q)">' +
                       '<input type="{{question.type}}" ng-change="optionChanged(question, q)" ng-model="q.$value" value="{{q.$value}}"> {{q.title}}' +
                     '</li>' +
@@ -46,9 +45,17 @@ angular.module('ionicate', [])
     link: function($scope) {
       $scope.results = [];
 
-      $scope.showCover = !!$scope.questions.cover;
-
       $scope.nextButton = $scope.nextButton || 'Next';
+
+      // If we have a cover, add it as the first question
+      if($scope.questions.cover) {
+        $scope.questions.unshift({
+          title: $scope.questions.cover.title,
+          content: $scope.questions.cover.content,
+          tag: 'cover',
+          noop: true
+        })
+      }
 
       $scope.questionIndex = -1;
       $scope.done = $scope.questions && $scope.questions.done;
@@ -109,6 +116,9 @@ angular.module('ionicate', [])
 
         for(var i = 0; i < qs.length; i++) {
           var q = qs[i];
+
+          if(q.noop) continue;
+          
           var opts = q.options;
           var o;
           var qResults = [];
@@ -141,6 +151,8 @@ angular.module('ionicate', [])
 
         return results;
       }
+
+      $scope.nextQuestion();
 
       $scope.onCanContact = function(contact) {
         if(contact) {
@@ -196,7 +208,6 @@ angular.module('ionicate', [])
       }
 
       $scope.submit = function() {
-        $scope.showCover = false;
         $scope.nextQuestion();
       }
     }
