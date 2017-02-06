@@ -12,7 +12,7 @@ angular.module('ionicate', [])
     template: '<div class="ionicate-wrap">' +
                 '<div class="ionicate-close"><a ng-click="close()"><i class="ion-ios-close"></i></a></div>' +
                 '<div class="ionicate-title" ng-if="questions.cover && showCover">{{questions.cover.title}}</div>' +
-                '<div class="ionicate-title" ng-if="question">{{question.title}}</div>' +
+                '<div class="ionicate-title" ng-if="question && !showCover">{{question.title}}</div>' +
                 '<div class="ionicate-title" ng-if="!question">{{done.title}}</div>' +
                 '<div class="ionicate-content">' +
                   '<div class="ionicate-cover" ng-if="questions.cover && showCover">' +
@@ -142,8 +142,6 @@ angular.module('ionicate', [])
         return results;
       }
 
-      $scope.nextQuestion();
-
       $scope.onCanContact = function(contact) {
         if(contact) {
           $scope.results.can_contact = true;
@@ -198,6 +196,7 @@ angular.module('ionicate', [])
       }
 
       $scope.submit = function() {
+        $scope.showCover = false;
         $scope.nextQuestion();
       }
     }
