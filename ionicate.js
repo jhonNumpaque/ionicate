@@ -49,7 +49,7 @@ angular.module('ionicate', [])
 
       // If we have a cover, add it as the first question
       if($scope.questions.cover) {
-        $scope.questions.unshift({
+        $scope.questions.questions.unshift({
           title: $scope.questions.cover.title,
           content: $scope.questions.cover.content,
           tag: 'cover',
@@ -118,7 +118,7 @@ angular.module('ionicate', [])
           var q = qs[i];
 
           if(q.noop) continue;
-          
+
           var opts = q.options;
           var o;
           var qResults = [];
