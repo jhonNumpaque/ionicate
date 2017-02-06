@@ -15,6 +15,9 @@ ionicate .ionicate-wrap {
   flex-direction: column;
   height: 100%;
 }
+ionicate .ionicate-sub-title {
+  font-size: 11px;
+}
 ionicate .ionicate-title {
   font-size: 16px;
   font-weight: bold;
