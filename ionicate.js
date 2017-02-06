@@ -6,7 +6,8 @@ angular.module('ionicate', [])
     scope: {
       questions: '=',
       onFinish: '&',
-      onClose: '&'
+      onClose: '&',
+      nextButton: '@'
     },
     template: '<div class="ionicate-wrap">' +
                 '<div class="ionicate-close"><a ng-click="close()"><i class="ion-ios-close"></i></a></div>' +
@@ -36,10 +37,12 @@ angular.module('ionicate', [])
                     '</li>' +
                   '</ul>' +
                 '</div>' +
-                '<div ng-if="question" class="ionicate-submit-button"><a class="ionicate-button" ng-click="submit()">Next</a></div>' +
+                '<div ng-if="question" class="ionicate-submit-button"><a class="ionicate-button" ng-click="submit()">{{nextButton}}</a></div>' +
               '</div>',
     link: function($scope) {
       $scope.results = [];
+
+      $scope.nextButton = $scope.nextButton || 'Submit';
 
       $scope.questionIndex = -1;
       $scope.done = $scope.questions && $scope.questions.done;
