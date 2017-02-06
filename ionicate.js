@@ -11,7 +11,7 @@ angular.module('ionicate', [])
     },
     template: '<div class="ionicate-wrap">' +
                 '<div class="ionicate-close"><a ng-click="close()"><i class="ion-ios-close"></i></a></div>' +
-                '<div class="ionicate-sub-title" ng-if="question">{{question.info}}</div>' +
+                '<div class="ionicate-sub-title" ng-if="question">{{questions.info}}</div>' +
                 '<div class="ionicate-title" ng-if="question">{{question.title}}</div>' +
                 '<div class="ionicate-title" ng-if="!question">{{done.title}}</div>' +
                 '<div class="ionicate-content">' +
