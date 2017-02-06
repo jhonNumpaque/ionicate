@@ -11,11 +11,13 @@ angular.module('ionicate', [])
     },
     template: '<div class="ionicate-wrap">' +
                 '<div class="ionicate-close"><a ng-click="close()"><i class="ion-ios-close"></i></a></div>' +
-                '<div class="ionicate-sub-title" ng-if="question">{{questions.info}}</div>' +
                 '<div class="ionicate-title" ng-if="question">{{question.title}}</div>' +
                 '<div class="ionicate-title" ng-if="!question">{{done.title}}</div>' +
                 '<div class="ionicate-content">' +
-                  '<div class="ionicate-done" ng-if="!question">' +
+                  '<div class="ionicate-cover" ng-if="questions.cover && showCover">' +
+                    '<div ng-bind-html="questions.cover.content"></div>' +
+                  '</div>' +
+                  '<div class="ionicate-done" ng-if="!question && !showCover">' +
                     '<div ng-if="!showContact">{{done.text}}</div>' +
                     '<div class="ionicate-contact" ng-if="showContact">' +
                       '<div ng-bind-html="questions.contact.message"></div>' +
@@ -28,7 +30,7 @@ angular.module('ionicate', [])
                       */
                     '</div>' +
                   '</div>' +
-                  '<ul class="ionicate-questions" ng-if="question">' +
+                  '<ul class="ionicate-questions" ng-if="question && !showCover">' +
                     '<li ng-repeat="q in question.options" ng-click="selectOption($event, question, q)">' +
                       '<input type="{{question.type}}" ng-change="optionChanged(question, q)" ng-model="q.$value" value="{{q.$value}}"> {{q.title}}' +
                     '</li>' +
@@ -42,6 +44,8 @@ angular.module('ionicate', [])
               '</div>',
     link: function($scope) {
       $scope.results = [];
+
+      $scope.showCover = !!$scope.questions.cover;
 
       $scope.nextButton = $scope.nextButton || 'Submit';
 
