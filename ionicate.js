@@ -11,6 +11,7 @@ angular.module('ionicate', [])
     },
     template: '<div class="ionicate-wrap">' +
                 '<div class="ionicate-close"><a ng-click="close()"><i class="ion-ios-close"></i></a></div>' +
+                '<div class="ionicate-title" ng-if="questions.cover && showCover">{{questions.cover.title}}</div>' +
                 '<div class="ionicate-title" ng-if="question">{{question.title}}</div>' +
                 '<div class="ionicate-title" ng-if="!question">{{done.title}}</div>' +
                 '<div class="ionicate-content">' +
@@ -47,7 +48,7 @@ angular.module('ionicate', [])
 
       $scope.showCover = !!$scope.questions.cover;
 
-      $scope.nextButton = $scope.nextButton || 'Submit';
+      $scope.nextButton = $scope.nextButton || 'Next';
 
       $scope.questionIndex = -1;
       $scope.done = $scope.questions && $scope.questions.done;
