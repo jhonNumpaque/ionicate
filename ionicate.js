@@ -13,6 +13,7 @@ angular.module('ionicate', [])
                 '<div class="ionicate-close"><a ng-click="close()"><i class="ion-ios-close"></i></a></div>' +
                 '<div class="ionicate-title" ng-if="question">{{question.title}}</div>' +
                 '<div class="ionicate-title" ng-if="!question">{{done.title}}</div>' +
+                '<div class="ionicate-title" ng-if="showContact">{{questions.contact.title}}</div>' +
                 '<div class="ionicate-content">' +
                   '<div class="ionicate-done" ng-if="!question && !showCover">' +
                     '<div ng-if="!showContact">{{done.text}}</div>' +
