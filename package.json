@@ -1,6 +1,6 @@
 {
   "name": "ionicate",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Simple angular 1 survey tool",
   "main": "ionicate.js",
   "scripts": {
